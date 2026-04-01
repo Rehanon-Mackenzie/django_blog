@@ -9,7 +9,7 @@
                 <!-- Post title goes in these h1 tags -->
                 <h1 class="post-title">{{ post.title }}</h1>
                 <!-- Post author goes before the | the post's created date goes after -->
-                <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
+                <article class="post-subtitle">{{ post.author }} | {{ post.created_on }}</article>
             </div>
             <div class="d-none d-md-block col-md-6 masthead-image">
                  {% if "placeholder" in post.featured_image.url %}
@@ -36,9 +36,9 @@
             <div class="card-body">
                 <!-- The post content goes inside the card-text. -->
                 <!-- Use the | safe filter inside the template tags -->
-                <p class="card-text">
+                <article class="card-text">
                     {{ post.content | safe }}
-                </p>
+                </article>
             </div>
         </div>
     </div>
@@ -61,26 +61,26 @@
                 <!-- We want a for loop inside the empty control tags
           to iterate through each comment in comments -->
                 {% for comment in comments %}
-                <div class="p-2 comments
+                <div class="article-2 comments
           {% if not comment.approved and comment.author == user %}
           faded{% elif not comment.approved %} d-none{% endif %}">
-                    <p class="font-weight-bold">
+                    <article class="font-weight-bold">
                         {{ comment.author }}
                         <span class="font-weight-normal">
                             {{ comment.created_on }}
                         </span> wrote:
-                    </p>
+                    </article>
                     <div id="comment{{ comment.id }}">
                         {{ comment.body | linebreaks }}
                     </div>
                     {% if not comment.approved and comment.author == user %}
-                    <p class="approval">
+                    <article class="approval">
                         This comment is awaiting approval
-                    </p>
+                    </article>
                     {% endif %}
                     {% if user.is_authenticated and comment.author == user %}
-                    <button class="btn btn-delete" comment_id="{{ comment.id }}">Delete</button>
-                    <button class="btn btn-edit" comment_id="{{ comment.id }}">Edit</button>
+                    <button class="btn btn-delete" data-comment_id="{{ comment.id }}">Delete</button>
+                    <button class="btn btn-edit" data-comment_id="{{ comment.id }}">Edit</button>
                     {% endif %}
                 </div>
                 <!-- Our for loop ends here -->
@@ -92,14 +92,14 @@
             <div class="card-body">
                 {% if user.is_authenticated %}
                 <h3>Leave a comment:</h3>
-                <p>Posting as: {{ user.username }}</p>
+                <article>Posting as: {{ user.username }}</article>
                 <form id="commentForm" method="post" style="margin-top: 1.3em;">
                     {{ comment_form | crispy }}
                     {% csrf_token %}
                     <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
                 </form>
                 {% else %}
-                <p>Log in to leave a comment</p>
+                <article>Log in to leave a comment</article>
                 {% endif %}
             </div>
         </div>
