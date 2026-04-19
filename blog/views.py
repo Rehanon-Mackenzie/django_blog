@@ -6,6 +6,8 @@ from .models import Post, Comment
 from .forms import CommentForm
 
 # Create your views here.
+
+
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
@@ -66,9 +68,9 @@ def post_detail(request, slug):
 def comment_edit(request, slug, comment_id):
     """
     Display an individual comment for edit.
-    
+
     **Context**
-    
+
     ``post``
         An instance of :model:`blog.Post`.
     ``comment``
@@ -98,9 +100,9 @@ def comment_edit(request, slug, comment_id):
 def comment_delete(request, slug, comment_id):
     """
     Delete an individual comment.
-    
+
     **Context**
-    
+
     ``post``
         An instance of :model:`blog.Post`.
     ``comment``
